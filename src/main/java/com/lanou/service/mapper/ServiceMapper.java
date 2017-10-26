@@ -19,4 +19,7 @@ public interface ServiceMapper {
 
     List<SService> findAll();
 
+    void setState1(Integer id);
+
+    void setState0(Integer id);
 }

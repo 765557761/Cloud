@@ -43,6 +43,16 @@ public class SerServiceImpl implements SerService {
         return;
     }
 
+    public void setStateS(Integer id) {
+        SService sService = mapper.selectByPrimaryKey(id);
+        if (sService.getStatus().equals("0")){
+            mapper.setState1(id);
+        }
+        if (sService.getStatus().equals("1")){
+            mapper.setState0(id);
+        }
+    }
+
     public PageInfo<SService> queryStudentByPage(Integer pageNo, Integer pageSize) {
         pageNo = pageNo == null ? 1 : pageNo;
         pageSize = pageSize == null ? 6 : pageSize;

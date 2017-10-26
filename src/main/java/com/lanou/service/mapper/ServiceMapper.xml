@@ -159,4 +159,10 @@
       cost_id = #{costId,jdbcType=INTEGER}
     where service_id = #{serviceId,jdbcType=INTEGER}
   </update>
+  <update id="setState1">
+    UPDATE service SET status = '1' WHERE service_id = #{id}
+  </update>
+  <update id="setState0">
+    UPDATE service SET status = '0' WHERE service_id = #{id}
+  </update>
 </mapper>

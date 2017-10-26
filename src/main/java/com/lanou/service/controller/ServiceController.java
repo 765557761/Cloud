@@ -68,16 +68,10 @@ public class ServiceController {
     @RequestMapping(value = "/modifyS")
     public SService modifyS(@RequestParam("Mid") Integer id,
                             HttpServletRequest request){
-//        List<Cost> list = costService.findAll();
-//        List<String> costList = new ArrayList<String>();
-//        for (Cost cost : list) {
-//            costList.add(cost.getDescr());
-//        }
-//        request.getSession().setAttribute("costTypeList",costList);
         request.getSession().setAttribute("SService",service.findById(id));
         return service.findById(id);
     }
-    @ResponseBody
+    @ResponseBody  // 显示所有资费
     @RequestMapping(value = "/modS1")
     public List<String> modS1(HttpServletRequest request){
         List<Cost> list = costService.findAll();
@@ -121,6 +115,19 @@ public class ServiceController {
         sService.setCreateDate(new Date());
         service.add(sService,samePasswd);
         return "addServiceOK";
+    }
+    //状态
+    @ResponseBody
+    @RequestMapping(value = "/setStateS",method = RequestMethod.POST)
+    public String setStateS(@RequestParam("Sid") Integer id){
+        service.setStateS(id);
+        return "setStateSOK";
+    }
+    //详情
+    @ResponseBody
+    @RequestMapping(value = "/detailS")
+    public String detailS(@RequestParam("Did") Integer id){
+        return "detailSOK";
     }
 
 }

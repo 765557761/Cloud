@@ -18,4 +18,6 @@ public interface SerService {
     void modi(SService sService);
 
     void add(SService sService, String samePasswd);
+
+    void setStateS(Integer id);
 }
