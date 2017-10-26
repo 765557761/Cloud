@@ -46,8 +46,6 @@ public class AccountController {
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String add(Account account,
                       @RequestParam("samePsw") String psw) throws Exception{
-        System.out.println(account);
-        System.out.println(psw);
         try {
             service.add(account,psw);
         } catch (AddException e) {
@@ -104,7 +102,10 @@ public class AccountController {
     }
     @ResponseBody
     @RequestMapping(value = "/modAccount",method = RequestMethod.POST)
-    public String modAccount(Account account){
+    public String modAccount(Account account,HttpServletRequest request){
+        Account acc = (Account) request.getSession().getAttribute("oldAcc");
+        account.setStatus(acc.getStatus());
+        System.out.println(account);
         service.update(account);
         return "updateOK";
     }

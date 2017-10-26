@@ -165,8 +165,16 @@
     }
     //删除
     function deleteS() {
-        var r = window.confirm("确定要删除此业务账号吗？删除后将不能恢复。");
-        document.getElementById("operate_result_info").style.display = "block";
+        $.ajax({
+            url:"/delS",
+            data:{
+                Did:$(this).parents().attr("id")
+            },
+            success:function (result) {
+                alert(result);
+                window.location.href = "/toServiceListPage"
+            }
+        })
     }
 </script>
 <body>
@@ -237,31 +245,6 @@
             <th class="width100">资费</th>
             <th class="width200"></th>
             </thead>
-            <!--<tr>-->
-            <!--<td>-->
-            <!--<a href="service_detail.html" title="查看明细">1</a>-->
-            <!--</td>-->
-            <!--<td>101</td>-->
-            <!--<td>230102197902137862</td>-->
-            <!--<td>张三</td>-->
-            <!--<td>openlab1</td>-->
-            <!--<td>开通</td>-->
-            <!--<td>192.168.0.23</td>-->
-            <!--<td>-->
-            <!--<a class="summary" onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">包-->
-            <!--20 小时</a>-->
-            <!--&lt;!&ndash;浮动的详细信息&ndash;&gt;-->
-            <!--<div class="detail_info">-->
-            <!--20小时，24.5 元，超出部分 0.03元/分钟-->
-            <!--</div>-->
-            <!--</td>-->
-            <!--<td class="td_modi">-->
-            <!--<input type="button" value="暂停" class="btn_pause" onclick="setState();"/>-->
-            <!--<input type="button" value="修改" class="btn_modify"-->
-            <!--onclick="location.href='service_modi.html';"/>-->
-            <!--<input type="button" value="删除" class="btn_delete" onclick="deleteAccount();"/>-->
-            <!--</td>-->
-            <!--</tr>-->
             <tbody id="tbS">
 
             </tbody>

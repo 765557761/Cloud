@@ -21,9 +21,10 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     @Resource
     private AccountMapper mapper;
-
+    //添加
     public void add(Account account, String psw) throws AddException {
         if (account.getLoginPasswd().equals(psw)){
+            account.setCreateDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
             mapper.insertSelective(account);
             return;
         }
@@ -33,22 +34,38 @@ public class AccountServiceImpl implements AccountService {
     public Account selectById(Integer id) {
         return mapper.selectByPrimaryKey(id);
     }
-
+    //修改
     public void update(Account account) {
+        if (account.getStatus().equals("删除")){
+            return;
+        }
+        System.out.println(account);
         mapper.updateByPrimaryKeySelective(account);
     }
-
+    //删除
     public void delById(Integer id) {
-        mapper.setState1(id);
+        Account account = mapper.selectByPrimaryKey(id);
+        if (account.getStatus().equals("删除")){
+            return;
+        }
+        account.setStatus("删除");
+        account.setCloseDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
+        mapper.updateByPrimaryKeySelective(account);
     }
-
+    //状态
     public void setState(Integer id,Account account) {
+        if (account.getStatus().equals("删除")){
+            return;
+        }
         if (account.getStatus().equals("暂停")){
             account.setCreateDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
             account.setStatus("开通");
+            account.setPauseDate(null);
             mapper.updateByPrimaryKeySelective(account);
+            return;
         }
         if (account.getStatus().equals("开通")){
+            account.setPauseDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
             account.setStatus("暂停");
             mapper.updateByPrimaryKeySelective(account);
         }

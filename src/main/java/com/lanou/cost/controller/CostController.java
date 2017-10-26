@@ -76,13 +76,17 @@ public class CostController {
         request.getSession().setAttribute("mod",mod);
         return "mod";
     }
+    @ResponseBody
     @RequestMapping(value = "/modifyNew",method = RequestMethod.POST)
     public String modifyNew(Cost cost,HttpServletRequest request){
         System.out.println(cost);
         Integer mid = (Integer) request.getSession().getAttribute("Mid");
+        cost.setStatus(service.selectById(mid).getStatus());
         cost.setCostId(mid);
+        cost.setCreatime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+        System.out.println(cost);
         service.update(cost);
-        return "fee/fee_list";
+        return "modifyNew";
     }
     @ResponseBody
     @RequestMapping(value = "/mod")

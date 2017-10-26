@@ -24,31 +24,42 @@ public class CostServiceImpl implements CostService {
     public List<Cost> findAll() {
         return mapper.findAll();
     }
-
+    //添加
     public void add(Cost cost) {
+        System.out.println(cost);
+        cost.setCreatime((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
+        cost.setStatus("暂停");
         mapper.insertSelective(cost);
     }
-
+    //删除
     public void del(Integer id) {
+        if (mapper.selectByPrimaryKey(id).getStatus().equals("开通")){
+            return;
+        }
+//        Cost cost = mapper.selectByPrimaryKey(id);
+//        cost.setStatus("删除");
+//        mapper.updateByPrimaryKeySelective(cost);
         mapper.deleteByPrimaryKey(id);
     }
-
+    //详情
     public Cost mod(Integer id) {
         return mapper.selectByPrimaryKey(id);
     }
-
+    //修改
     public void update(Cost cost) {
+        if (cost.getStatus().equals("开通")){
+            return;
+        }
         mapper.updateByPrimaryKeySelective(cost);
     }
 
     public Cost selectById(Integer id) {
         return mapper.selectByPrimaryKey(id);
     }
-
+    //状态
     public void updateByPrimaryKeySelective(Cost cost) {
         if (cost.getStatus().equals("开通")){
-            cost.setStatus("暂停");
-            mapper.updateByPrimaryKeySelective(cost);
+            return;
         }
         if (cost.getStatus().equals("暂停")){
             cost.setStartime((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
@@ -60,7 +71,6 @@ public class CostServiceImpl implements CostService {
     public Cost selectByDescr(String descr) {
         return mapper.selectByDescr(descr);
     }
-
 
     public List<Cost> findwithPageInfo(Integer pageNo, Integer pageSize) {
         // 目标：获取PageInfo对象

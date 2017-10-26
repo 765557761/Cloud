@@ -32,11 +32,11 @@ public class SerServiceImpl implements SerService {
     public SService findById(Integer id) {
         return mapper.selectByPrimaryKey(id);
     }
-
+    //修改
     public void modi(SService sService) {
         mapper.updateByPrimaryKeySelective(sService);
     }
-
+    //添加
     public void add(SService sService, String samePasswd) {
         if (sService.getLoginPasswd().equals(samePasswd)){
             System.out.println("SServiceImpl");
@@ -44,16 +44,28 @@ public class SerServiceImpl implements SerService {
         }
         return;
     }
-
+    //状态
     public void setStateS(Integer id) {
         SService sService = mapper.selectByPrimaryKey(id);
-        sService.setCreateDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
         if (sService.getStatus().equals("暂停")){
+            sService.setStatus("开通");
+            sService.setCreateDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
             mapper.updateByPrimaryKeySelective(sService);
+            return;
         }
         if (sService.getStatus().equals("开通")){
+            sService.setStatus("暂停");
+            sService.setPauseDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
             mapper.updateByPrimaryKeySelective(sService);
+            return;
         }
+    }
+    //删除
+    public void delS(Integer id) {
+        SService sService = mapper.selectByPrimaryKey(id);
+        sService.setStatus("删除");
+        sService.setCloseDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
+        mapper.updateByPrimaryKeySelective(sService);
     }
 
     public PageInfo<SService> queryStudentByPage(Integer pageNo, Integer pageSize) {

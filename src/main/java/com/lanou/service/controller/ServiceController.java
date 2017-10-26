@@ -92,6 +92,9 @@ public class ServiceController {
         SService sService = (SService) request.getSession().getAttribute("SService");
         Cost cost = costService.selectById(sService.getCostId());
         cost.setDescr(descr);
+        if (sService.getStatus().equals("删除")){
+            return "modiSNO";
+        }
         costService.updateByPrimaryKeySelective(cost);
         return "modiSOK";
     }
@@ -134,6 +137,13 @@ public class ServiceController {
     @RequestMapping(value = "/detailSs")
     public SService detailSs(HttpServletRequest request){
         return (SService) request.getSession().getAttribute("detailSService");
+    }
+    //删除
+    @ResponseBody
+    @RequestMapping(value = "/delS")
+    public String delS(@RequestParam("Did") Integer id){
+        service.delS(id);
+        return "delSOK";
     }
 
 }

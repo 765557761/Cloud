@@ -20,4 +20,6 @@ public interface SerService {
     void add(SService sService, String samePasswd);
 
     void setStateS(Integer id);
+
+    void delS(Integer id);
 }
