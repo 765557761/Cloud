@@ -8,9 +8,9 @@
     <result column="os_username" jdbcType="VARCHAR" property="osUsername" />
     <result column="login_passwd" jdbcType="VARCHAR" property="loginPasswd" />
     <result column="status" jdbcType="CHAR" property="status" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="pause_date" jdbcType="TIMESTAMP" property="pauseDate" />
-    <result column="close_date" jdbcType="TIMESTAMP" property="closeDate" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="pause_date" jdbcType="VARCHAR" property="pauseDate" />
+    <result column="close_date" jdbcType="VARCHAR" property="closeDate" />
     <result column="cost_id" jdbcType="INTEGER" property="costId" />
     <collection column="account_id" property="account"
                 select="com.lanou.account.mapper.AccountMapper.selectByPrimaryKey"/>
@@ -43,7 +43,7 @@
       cost_id)
     values (#{serviceId,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{unixHost,jdbcType=VARCHAR}, 
       #{osUsername,jdbcType=VARCHAR}, #{loginPasswd,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{pauseDate,jdbcType=TIMESTAMP}, #{closeDate,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=VARCHAR}, #{pauseDate,jdbcType=VARCHAR}, #{closeDate,jdbcType=VARCHAR},
       #{costId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lanou.service.bean.SService">
@@ -100,13 +100,13 @@
         #{status,jdbcType=CHAR},
       </if>
       <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
+        #{createDate,jdbcType=VARCHAR},
       </if>
       <if test="pauseDate != null">
-        #{pauseDate,jdbcType=TIMESTAMP},
+        #{pauseDate,jdbcType=VARCHAR},
       </if>
       <if test="closeDate != null">
-        #{closeDate,jdbcType=TIMESTAMP},
+        #{closeDate,jdbcType=VARCHAR},
       </if>
       <if test="costId != null">
         #{costId,jdbcType=INTEGER},
@@ -132,13 +132,13 @@
         status = #{status,jdbcType=CHAR},
       </if>
       <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
+        create_date = #{createDate,jdbcType=VARCHAR},
       </if>
       <if test="pauseDate != null">
-        pause_date = #{pauseDate,jdbcType=TIMESTAMP},
+        pause_date = #{pauseDate,jdbcType=VARCHAR},
       </if>
       <if test="closeDate != null">
-        close_date = #{closeDate,jdbcType=TIMESTAMP},
+        close_date = #{closeDate,jdbcType=VARCHAR},
       </if>
       <if test="costId != null">
         cost_id = #{costId,jdbcType=INTEGER},
@@ -153,16 +153,16 @@
       os_username = #{osUsername,jdbcType=VARCHAR},
       login_passwd = #{loginPasswd,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      pause_date = #{pauseDate,jdbcType=TIMESTAMP},
-      close_date = #{closeDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      pause_date = #{pauseDate,jdbcType=VARCHAR},
+      close_date = #{closeDate,jdbcType=VARCHAR},
       cost_id = #{costId,jdbcType=INTEGER}
     where service_id = #{serviceId,jdbcType=INTEGER}
   </update>
   <update id="setState1">
-    UPDATE service SET status = '1' WHERE service_id = #{id}
+    UPDATE service SET status = '开通' WHERE service_id = #{id}
   </update>
   <update id="setState0">
-    UPDATE service SET status = '0' WHERE service_id = #{id}
+    UPDATE service SET status = '暂停' WHERE service_id = #{id}
   </update>
 </mapper>

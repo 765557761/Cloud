@@ -9,8 +9,8 @@
     <result column="unit_cost" jdbcType="INTEGER" property="unitCost" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="descr" jdbcType="VARCHAR" property="descr" />
-    <result column="creatime" jdbcType="TIMESTAMP" property="creatime" />
-    <result column="startime" jdbcType="TIMESTAMP" property="startime" />
+    <result column="creatime" jdbcType="VARCHAR" property="creatime" />
+    <result column="startime" jdbcType="VARCHAR" property="startime" />
     <result column="cost_type" jdbcType="CHAR" property="costType" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -44,7 +44,7 @@
       cost_type)
     values (#{costId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{baseDuration,jdbcType=INTEGER}, 
       #{baseCost,jdbcType=INTEGER}, #{unitCost,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
-      #{descr,jdbcType=VARCHAR}, #{creatime,jdbcType=TIMESTAMP}, #{startime,jdbcType=TIMESTAMP}, 
+      #{descr,jdbcType=VARCHAR}, #{creatime,jdbcType=VARCHAR}, #{startime,jdbcType=VARCHAR},
       #{costType,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lanou.cost.bean.Cost">
@@ -104,10 +104,10 @@
         #{descr,jdbcType=VARCHAR},
       </if>
       <if test="creatime != null">
-        #{creatime,jdbcType=TIMESTAMP},
+        #{creatime,jdbcType=VARCHAR},
       </if>
       <if test="startime != null">
-        #{startime,jdbcType=TIMESTAMP},
+        #{startime,jdbcType=VARCHAR},
       </if>
       <if test="costType != null">
         #{costType,jdbcType=CHAR},
@@ -136,10 +136,10 @@
         descr = #{descr,jdbcType=VARCHAR},
       </if>
       <if test="creatime != null">
-        creatime = #{creatime,jdbcType=TIMESTAMP},
+        creatime = #{creatime,jdbcType=VARCHAR},
       </if>
       <if test="startime != null">
-        startime = #{startime,jdbcType=TIMESTAMP},
+        startime = #{startime,jdbcType=VARCHAR},
       </if>
       <if test="costType != null">
         cost_type = #{costType,jdbcType=CHAR},
@@ -155,9 +155,15 @@
       unit_cost = #{unitCost,jdbcType=INTEGER},
       status = #{status,jdbcType=CHAR},
       descr = #{descr,jdbcType=VARCHAR},
-      creatime = #{creatime,jdbcType=TIMESTAMP},
-      startime = #{startime,jdbcType=TIMESTAMP},
+      creatime = #{creatime,jdbcType=VARCHAR},
+      startime = #{startime,jdbcType=VARCHAR},
       cost_type = #{costType,jdbcType=CHAR}
     where cost_id = #{costId,jdbcType=INTEGER}
+  </update>
+  <update id="setStatus0">
+    UPDATE cost SET status = '暂停' WHERE cost_id = #{costId}
+  </update>
+  <update id="setStatus1">
+    UPDATE cost SET status = '开通' WHERE cost_id = #{costId}
   </update>
 </mapper>

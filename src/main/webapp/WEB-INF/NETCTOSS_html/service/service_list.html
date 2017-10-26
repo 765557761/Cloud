@@ -109,32 +109,34 @@
             var status = $("<td></td>").html($("<p>" + result[i].status + "</p>"));
             var unixHost = $("<td></td>").html($("<p>" + result[i].unixHost + "</p>"));
             var descr = $("<td></td>").html($("<p>" + result[i].cost.descr + "</p>"));
-//            if ((result[i].status) == "1" ){
-            var tdall = $("<td></td>").attr("id", result[i].serviceId);
-            $("<input type='button' value='0/1' class='btn_pause'/>").appendTo(tdall).click(setStateS);
-            $("<input type='button' value='修改' class='btn_modify'/>").appendTo(tdall).click(modifyS);
-            $("<input type='button' value='删除' class='btn_delete'/>").appendTo(tdall).click(deleteS);
+//            if ((result[i].status) == "开通") {
+                var tdall = $("<td></td>").attr("id", result[i].serviceId);
+                $("<input type='button' value='0/1' class='btn_pause'/>").appendTo(tdall).click(setStateS);
+                $("<input type='button' value='修改' class='btn_modify'/>").appendTo(tdall).click(modifyS);
+                $("<input type='button' value='删除' class='btn_delete'/>").appendTo(tdall).click(deleteS);
 //            }
             var tr = $("<tr></tr>").append(serviceId).append(accountId).append(idcardNo).append(realName)
                     .append(osUsername).append(status).append(unixHost).append(descr).append(tdall);
 //                    .append(osUsername).append(status).append(unixHost).append(tdall);
             $("#tbS").append(tr);
         }
+
     }
     //详情
     function detailS() {
         $.ajax({
-            type:"post",
-            url:"/detailS",
-            data:{
+            type: "post",
+            url: "/detailSS",
+            data: {
                 Did: $(this).parents().attr("id")
             },
-            success:function (result) {
+            success: function (result) {
                 alert(result);
                 window.location.href = "toServiceDetailPage"
             }
         })
     }
+
     //开通或暂停
     function setStateS() {
         $.ajax({
@@ -143,12 +145,13 @@
             data: {
                 Sid: $(this).parents().attr("id")
             },
-            success:function (result) {
+            success: function (result) {
                 alert(result);
                 window.location.href = "/toServiceListPage"
             }
         })
     }
+
     //修改
     function modifyS() {
         $.ajax({
@@ -162,6 +165,7 @@
             }
         })
     }
+
     //删除
     function deleteS() {
         var r = window.confirm("确定要删除此业务账号吗？删除后将不能恢复。");

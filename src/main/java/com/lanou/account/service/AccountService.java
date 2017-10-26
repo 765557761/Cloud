@@ -25,7 +25,7 @@ public interface AccountService {
 
     void delById(Integer id);
 
-    void setState(Integer id,String status);
+    void setState(Integer id,Account account);
 
     List<Account> like(String idcard, String realName,String loginName);
 

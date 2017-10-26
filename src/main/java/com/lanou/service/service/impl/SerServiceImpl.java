@@ -7,6 +7,8 @@ import com.lanou.service.bean.SService;
 import com.lanou.service.service.SerService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,11 +47,12 @@ public class SerServiceImpl implements SerService {
 
     public void setStateS(Integer id) {
         SService sService = mapper.selectByPrimaryKey(id);
-        if (sService.getStatus().equals("0")){
-            mapper.setState1(id);
+        sService.setCreateDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
+        if (sService.getStatus().equals("暂停")){
+            mapper.updateByPrimaryKeySelective(sService);
         }
-        if (sService.getStatus().equals("1")){
-            mapper.setState0(id);
+        if (sService.getStatus().equals("开通")){
+            mapper.updateByPrimaryKeySelective(sService);
         }
     }
 

@@ -123,7 +123,8 @@ public class AccountController {
     public String setState(@RequestParam("Sid") Integer id){
         Account account = service.selectById(id);
         String status = account.getStatus();
-        service.setState(id,status);
+        service.setState(id,account);
+
         return "setStateOK";
     }
 

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -45,28 +47,26 @@ public class CostController {
         return "/fee/fee_detail";
     }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
     @ResponseBody
     @RequestMapping(value = "/findAll")
     public List<Cost> findAll(){
         System.out.println("findAll");
         return service.findAll();
     }
-
+    //添加
     @ResponseBody
     @RequestMapping(value = "/addFee",method = RequestMethod.POST)
     public String fee_add(Cost cost){
         service.add(cost);
         return "fee/fee_list";
     }
-
+    //删除
     @ResponseBody
     @RequestMapping(value = "/del")
     public String del(@RequestParam("Did") Integer id){
         service.del(id);
         return "fee/fee_list";
     }
-
     // 修改
     @ResponseBody
     @RequestMapping(value = "/modify1")
@@ -91,7 +91,6 @@ public class CostController {
         System.out.println("Controller---mod");
         return (Cost) request.getSession().getAttribute("mod");
     }
-
     // 分页
     @ResponseBody
     @RequestMapping(value = "/stu",method = RequestMethod.POST)
@@ -100,14 +99,12 @@ public class CostController {
         System.out.println("pageNo:" + pagetNo + "  " + "pageSize:" + pageSize);
         return service.findwithPageInfo(pagetNo,pageSize);
     }
-
     @ResponseBody
     @RequestMapping(value = "/pageInfo",method = RequestMethod.POST)
     public PageInfo<Cost> pageInfo(@RequestParam("pageSize") Integer pageSize){
         System.out.println("pageInfo");
         return service.getPageInfo(pageSize);
     }
-
     // 查看
     @ResponseBody
     @RequestMapping(value = "/detail")
@@ -126,14 +123,13 @@ public class CostController {
         System.out.println(cost);
         return cost;
     }
-
     // 启用
+    @ResponseBody
     @RequestMapping(value = "/start",method = RequestMethod.POST)
-    public void start(@RequestParam("Sid") Integer id){
+    public String start(@RequestParam("Sid") Integer id){
         Cost cost = service.selectById(id);
-        cost.setStatus("1");
-        cost.setStartime(new Date());
         service.updateByPrimaryKeySelective(cost);
+        return "setStatusOK";
     }
 
 }

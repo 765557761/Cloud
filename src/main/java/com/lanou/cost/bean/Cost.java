@@ -17,9 +17,9 @@ public class Cost {
 
     private String descr;
 
-    private Date creatime;
+    private String creatime;
 
-    private Date startime;
+    private String startime;
 
     private String costType;
 
@@ -79,19 +79,19 @@ public class Cost {
         this.descr = descr == null ? null : descr.trim();
     }
 
-    public Date getCreatime() {
+    public String getCreatime() {
         return creatime;
     }
 
-    public void setCreatime(Date creatime) {
+    public void setCreatime(String creatime) {
         this.creatime = creatime;
     }
 
-    public Date getStartime() {
+    public String getStartime() {
         return startime;
     }
 
-    public void setStartime(Date startime) {
+    public void setStartime(String startime) {
         this.startime = startime;
     }
 
@@ -113,8 +113,8 @@ public class Cost {
                 ", unitCost=" + unitCost +
                 ", status='" + status + '\'' +
                 ", descr='" + descr + '\'' +
-                ", creatime=" + creatime +
-                ", startime=" + startime +
+                ", creatime='" + creatime + '\'' +
+                ", startime='" + startime + '\'' +
                 ", costType='" + costType + '\'' +
                 '}';
     }

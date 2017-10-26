@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +48,6 @@ public class ServiceController {
         return "service/service_modi";
     }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
     // 分页
     @ResponseBody
     @RequestMapping(value = "/stu3",method = RequestMethod.POST)
@@ -56,13 +56,11 @@ public class ServiceController {
         System.out.println("pagetNo:---"+pagetNo + "pageSize:---"+pageSize);
         return service.findwithPageInfo(pagetNo,pageSize);
     }
-
     @ResponseBody
     @RequestMapping(value = "/pageInfo3",method = RequestMethod.POST)
     public PageInfo<SService> pageInfo(@RequestParam("pageSize") Integer pageSize){
         return service.getPageInfo(pageSize);
     }
-
     // 修改(回显)
     @ResponseBody
     @RequestMapping(value = "/modifyS")
@@ -109,10 +107,10 @@ public class ServiceController {
     public String addService(SService sService,
                              @RequestParam("descr") String descr,
                              @RequestParam("samePasswd") String samePasswd){
-        sService.setStatus("1");
+        sService.setStatus("开通");
         Cost cost = costService.selectByDescr(descr);
         sService.setCostId(cost.getCostId());
-        sService.setCreateDate(new Date());
+        sService.setCreateDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
         service.add(sService,samePasswd);
         return "addServiceOK";
     }
@@ -125,9 +123,17 @@ public class ServiceController {
     }
     //详情
     @ResponseBody
-    @RequestMapping(value = "/detailS")
-    public String detailS(@RequestParam("Did") Integer id){
+    @RequestMapping(value = "/detailSS")
+    public String detailS(@RequestParam("Did") Integer id,
+                          HttpServletRequest request){
+//        System.out.println(service.findById(id).getStatus());
+        request.getSession().setAttribute("detailSService",service.findById(id));
         return "detailSOK";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/detailSs")
+    public SService detailSs(HttpServletRequest request){
+        return (SService) request.getSession().getAttribute("detailSService");
     }
 
 }

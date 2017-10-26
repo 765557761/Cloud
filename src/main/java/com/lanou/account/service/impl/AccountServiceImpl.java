@@ -10,6 +10,8 @@ import com.lanou.account.service.AccountService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,12 +42,15 @@ public class AccountServiceImpl implements AccountService {
         mapper.setState1(id);
     }
 
-    public void setState(Integer id,String status) {
-        if (status.equals("0")){
-            mapper.setState(id);
+    public void setState(Integer id,Account account) {
+        if (account.getStatus().equals("暂停")){
+            account.setCreateDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+            account.setStatus("开通");
+            mapper.updateByPrimaryKeySelective(account);
         }
-        if (status.equals("1")){
-            mapper.setState1(id);
+        if (account.getStatus().equals("开通")){
+            account.setStatus("暂停");
+            mapper.updateByPrimaryKeySelective(account);
         }
     }
 

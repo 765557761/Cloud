@@ -282,9 +282,9 @@
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>
   <update id="setState">
-    update account SET status = '1' WHERE account_id = #{id}
+    update account SET status = '开通' WHERE account_id = #{id}
   </update>
   <update id="setState1">
-    update account SET status = '0' WHERE account_id = #{id}
+    update account SET status = '暂停' WHERE account_id = #{id}
   </update>
 </mapper>

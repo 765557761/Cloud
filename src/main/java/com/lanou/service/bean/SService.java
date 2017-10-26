@@ -21,11 +21,11 @@ public class SService {
 
     private String status; // 状态
 
-    private Date createDate;
+    private String createDate;
 
-    private Date pauseDate;
+    private String pauseDate;
 
-    private Date closeDate;
+    private String closeDate;
 
     private Integer costId; // costId
 
@@ -97,27 +97,27 @@ public class SService {
         this.status = status == null ? null : status.trim();
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
-    public Date getPauseDate() {
+    public String getPauseDate() {
         return pauseDate;
     }
 
-    public void setPauseDate(Date pauseDate) {
+    public void setPauseDate(String pauseDate) {
         this.pauseDate = pauseDate;
     }
 
-    public Date getCloseDate() {
+    public String getCloseDate() {
         return closeDate;
     }
 
-    public void setCloseDate(Date closeDate) {
+    public void setCloseDate(String closeDate) {
         this.closeDate = closeDate;
     }
 
@@ -138,13 +138,12 @@ public class SService {
                 ", osUsername='" + osUsername + '\'' +
                 ", loginPasswd='" + loginPasswd + '\'' +
                 ", status='" + status + '\'' +
-                ", createDate=" + createDate +
-                ", pauseDate=" + pauseDate +
-                ", closeDate=" + closeDate +
+                ", createDate='" + createDate + '\'' +
+                ", pauseDate='" + pauseDate + '\'' +
+                ", closeDate='" + closeDate + '\'' +
                 ", costId=" + costId +
                 ", account=" + account +
                 ", cost=" + cost +
                 '}';
     }
-
 }

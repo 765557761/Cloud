@@ -8,6 +8,8 @@ import com.lanou.cost.service.CostService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,7 +46,15 @@ public class CostServiceImpl implements CostService {
     }
 
     public void updateByPrimaryKeySelective(Cost cost) {
-        mapper.updateByPrimaryKeySelective(cost);
+        if (cost.getStatus().equals("开通")){
+            cost.setStatus("暂停");
+            mapper.updateByPrimaryKeySelective(cost);
+        }
+        if (cost.getStatus().equals("暂停")){
+            cost.setStartime((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
+            cost.setStatus("开通");
+            mapper.updateByPrimaryKeySelective(cost);
+        }
     }
 
     public Cost selectByDescr(String descr) {

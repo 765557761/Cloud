@@ -20,4 +20,8 @@ public interface CostMapper {
     List<Cost> findAll();
 
     Cost selectByDescr(String descr);
+
+    void setStatus0(Integer costId);
+
+    void setStatus1(Integer costId);
 }
