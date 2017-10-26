@@ -60,7 +60,7 @@
                 Mid: $(this).parents().attr("id")
             },
             success: function (result) {
-                window.location.href = "/modifyJsp"
+                window.location.href = "/toFeeModifyPage"
             }
         })
     }
@@ -181,7 +181,7 @@
             },
             success: function (result) {
                 alert(result);
-                window.location.href = "/detailJsp"
+                window.location.href = "/toFeeDetailPage"
             }
         });
     }
@@ -219,7 +219,7 @@
                 <input type="button" value="基费" class="sort_asc" onclick="sort(this);"/>
                 <input type="button" value="时长" class="sort_asc" onclick="sort(this);"/>
             </div>
-            <a href="/feeAdd">增加</a>
+            <a href="/toFeeAddPage">增加</a>
 
         </div>
         <!--启用操作的操作提示-->

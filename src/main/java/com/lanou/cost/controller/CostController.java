@@ -24,26 +24,25 @@ public class CostController {
 
     @Resource
     private CostService service;
+
     @RequestMapping(value = "/index")
     public String index(){
         return "index";
     }
     @RequestMapping(value = "/toFeeListPage")
-    public String costList(){
+    public String toFeeListPage(){
         return "fee/fee_list";
     }
-    @RequestMapping(value = "/feeAdd")
-    public String feeAdd(){
+    @RequestMapping(value = "/toFeeAddPage")
+    public String toFeeAddPage(){
         return "fee/fee_add";
     }
-    @RequestMapping(value = "/modifyJsp")
-    public String modifyJsp(){
-        System.out.println("modityJsp");
+    @RequestMapping(value = "/toFeeModifyPage")
+    public String toFeeModifyPage(){
         return "/fee/fee_modi";
     }
-    @RequestMapping(value = "/detailJsp")
-    public String detailJsp(){
-        System.out.println("detailJsp");
+    @RequestMapping(value = "/toFeeDetailPage")
+    public String toFeeDetailPage(){
         return "/fee/fee_detail";
     }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

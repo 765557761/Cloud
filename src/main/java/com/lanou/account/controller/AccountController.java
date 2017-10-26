@@ -26,15 +26,15 @@ public class AccountController {
     public String toAccountListPage(){
         return "account/account_list";
     }
-    @RequestMapping(value = "/toAddJsp")
+    @RequestMapping(value = "/toAccountAddPage")
     public String toAddJsp(){
         return "account/account_add";
     }
-    @RequestMapping(value = "/toDetailJsp")
+    @RequestMapping(value = "/toAccountDetailPage")
     public String toDetailJsp(){
         return "account/account_detail";
     }
-    @RequestMapping(value = "/toModiJsp")
+    @RequestMapping(value = "/toAccountModifyPage")
     public String toModiJsp(){
         return "account/account_modi";
     }
