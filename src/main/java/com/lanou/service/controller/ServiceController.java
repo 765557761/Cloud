@@ -145,5 +145,16 @@ public class ServiceController {
         service.delS(id);
         return "delSOK";
     }
+    //查询
+    @ResponseBody
+    @RequestMapping(value = "/findSer",method = RequestMethod.POST)
+    public List<SService> findS(@RequestParam("osUsername") String osUsername,
+                                @RequestParam("idcardNo") String idcardNo,
+                                @RequestParam("unixHost") String unixHost,
+                                @RequestParam("status") String status){
+        Integer accountId = accountService.findIdCard(idcardNo).getAccountId();
+        List<SService> list = service.findS(osUsername, unixHost, status, accountId);
+        return list;
+    }
 
 }

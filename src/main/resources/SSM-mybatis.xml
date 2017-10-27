@@ -25,7 +25,12 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations"
                   value="classpath:com/lanou/cost/mapper/*.xml,
-                  com/lanou/account/mapper/*.xml,com/lanou/service/mapper/*.xml"/>
+                  com/lanou/account/mapper/*.xml,
+                  com/lanou/service/mapper/*.xml,
+                  com/lanou/role_info/mapper/*.xml,
+                  com/lanou/admin_info/mapper/*.xml,
+                  com/lanou/admin_role/mapper/*.xml,
+                  com/lanou/module_info/mapper/*.xml"/>
         <!--可以读取现成的config.xml文件,即原来的mybatis配置文件-->
         <property name="plugins">
             <array>
@@ -43,7 +48,14 @@
 
     <!--Mapper扫描器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.lanou.cost.mapper,com.lanou.account.mapper,com.lanou.service.mapper"/>
+        <property name="basePackage" value="com.lanou.cost.mapper,
+        com.lanou.account.mapper,
+        com.lanou.service.mapper,
+        com.lanou.role_info.mapper,
+        com.lanou.admin_info.mapper,
+        com.lanou.admin_role.mapper,
+        com.lanou.role_module.mapper,
+        com.lanou.module_info.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 

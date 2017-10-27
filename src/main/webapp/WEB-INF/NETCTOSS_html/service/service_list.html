@@ -110,17 +110,16 @@
             var unixHost = $("<td></td>").html($("<p>" + result[i].unixHost + "</p>"));
             var descr = $("<td></td>").html($("<p>" + result[i].cost.descr + "</p>"));
 //            if ((result[i].status) == "开通") {
-                var tdall = $("<td></td>").attr("id", result[i].serviceId);
-                $("<input type='button' value='0/1' class='btn_pause'/>").appendTo(tdall).click(setStateS);
-                $("<input type='button' value='修改' class='btn_modify'/>").appendTo(tdall).click(modifyS);
-                $("<input type='button' value='删除' class='btn_delete'/>").appendTo(tdall).click(deleteS);
+            var tdall = $("<td></td>").attr("id", result[i].serviceId);
+            $("<input type='button' value='0/1' class='btn_pause'/>").appendTo(tdall).click(setStateS);
+            $("<input type='button' value='修改' class='btn_modify'/>").appendTo(tdall).click(modifyS);
+            $("<input type='button' value='删除' class='btn_delete'/>").appendTo(tdall).click(deleteS);
 //            }
             var tr = $("<tr></tr>").append(serviceId).append(accountId).append(idcardNo).append(realName)
                     .append(osUsername).append(status).append(unixHost).append(descr).append(tdall);
 //                    .append(osUsername).append(status).append(unixHost).append(tdall);
             $("#tbS").append(tr);
         }
-
     }
     //详情
     function detailS() {
@@ -166,12 +165,31 @@
     //删除
     function deleteS() {
         $.ajax({
-            url:"/delS",
-            data:{
-                Did:$(this).parents().attr("id")
+            url: "/delS",
+            data: {
+                Did: $(this).parents().attr("id")
             },
-            success:function (result) {
+            success: function (result) {
                 alert(result);
+                window.location.href = "/toServiceListPage"
+            }
+        })
+    }
+    //查询
+    function findS() {
+        alert("findSer");
+        $.ajax({
+            type:"post",
+            url: "/findSer",
+            data: {
+                osUsername: $("#osUsernameSer").val(),
+                unixHost: $("#unixHostSer").val(),
+                idcardNo: $("#incardNoSer").val(),
+                status: $("#statusSer option:selected").text()
+            },
+            success: function (result) {
+                $("#tbS").children().remove();
+                pageAllS(result);
                 window.location.href = "/toServiceListPage"
             }
         })
@@ -206,24 +224,26 @@
     <!--查询-->
     <div class="search_add">
         <div>
-            OS 账号：<input type="text" value="" class="width100 text_search"/>
+            OS 账号：<input id="osUsernameSer" type="text" value="" class="width100 text_search"/>
         </div>
         <div>
-            服务器 IP：<input type="text" value="" class="width100 text_search"/>
+            服务器 IP：<input id="unixHostSer" type="text" value="" class="width100 text_search"/>
         </div>
         <div>
-            身份证：<input type="text" value="" class="text_search"/>
+            身份证：<input id="incardNoSer" type="text" value="" class="text_search"/>
         </div>
         <div>
             状态：
-            <select class="select_search">
+            <select id="statusSer" class="select_search">
                 <option>全部</option>
                 <option>开通</option>
                 <option>暂停</option>
                 <option>删除</option>
             </select>
         </div>
-        <div><input type="button" value="搜索" class="btn_search"/></div>
+        <div>
+            <input type="button" value="搜索" class="btn_search" onclick="findS()"/>
+        </div>
         <input type="button" value="增加" class="btn_add" onclick="location.href ='/toServiceAddPage' "/>
     </div>
     <!--删除的操作提示-->

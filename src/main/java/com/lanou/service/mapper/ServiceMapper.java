@@ -22,4 +22,6 @@ public interface ServiceMapper {
     void setState1(Integer id);
 
     void setState0(Integer id);
+
+    List<SService> findS(String osUsername, String unixHost, String status, Integer accountId);
 }

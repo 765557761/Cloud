@@ -28,6 +28,17 @@ public class SerServiceImpl implements SerService {
     public PageInfo<SService> getPageInfo(Integer pageSize) {
         return queryStudentByPage(null, pageSize);
     }
+    public PageInfo<SService> queryStudentByPage(Integer pageNo, Integer pageSize) {
+        pageNo = pageNo == null ? 1 : pageNo;
+        pageSize = pageSize == null ? 6 : pageSize;
+        PageHelper.startPage(pageNo, pageSize);
+        // 获取全部学员
+        List<SService> serviceList = mapper.findAll();
+        System.out.println(serviceList);
+        // 使用PageInfo对结果进行包装
+        PageInfo<SService> pageInfo = new PageInfo<SService>(serviceList);
+        return pageInfo;
+    }
 
     public SService findById(Integer id) {
         return mapper.selectByPrimaryKey(id);
@@ -68,15 +79,10 @@ public class SerServiceImpl implements SerService {
         mapper.updateByPrimaryKeySelective(sService);
     }
 
-    public PageInfo<SService> queryStudentByPage(Integer pageNo, Integer pageSize) {
-        pageNo = pageNo == null ? 1 : pageNo;
-        pageSize = pageSize == null ? 6 : pageSize;
-        PageHelper.startPage(pageNo, pageSize);
-        // 获取全部学员
-        List<SService> serviceList = mapper.findAll();
-        System.out.println(serviceList);
-        // 使用PageInfo对结果进行包装
-        PageInfo<SService> pageInfo = new PageInfo<SService>(serviceList);
-        return pageInfo;
+    public List<SService> findS(String osUsername, String unixHost, String status, Integer accountId) {
+        return mapper.findS(osUsername,unixHost,status,accountId);
     }
+
+
+
 }

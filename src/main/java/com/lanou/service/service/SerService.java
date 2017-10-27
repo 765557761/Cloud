@@ -22,4 +22,7 @@ public interface SerService {
     void setStateS(Integer id);
 
     void delS(Integer id);
+
+
+    List<SService> findS(String osUsername, String unixHost, String status, Integer accountId);
 }
