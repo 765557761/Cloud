@@ -1,17 +1,24 @@
 package com.lanou.role_info.controller;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.github.pagehelper.PageInfo;
 import com.lanou.role_info.bean.RoleInfo;
 import com.lanou.role_info.service.RoleInfoService;
 import com.lanou.service.bean.SService;
+import com.oracle.tools.packager.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.nio.ch.IOUtil;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -80,6 +87,14 @@ public class RoleInfoController {
     public String delRM(@RequestParam("RMDid") Integer id){
         service.delById(id);
         return "delOK";
+    }
+    //添加
+    @ResponseBody
+    @RequestMapping(value = "/addRole",method = RequestMethod.POST)
+    public String addRM(
+                        @RequestParam("name") String name) throws Exception {
+        System.out.println(name);
+        return "addRMOKOKOK";
     }
 
 }
