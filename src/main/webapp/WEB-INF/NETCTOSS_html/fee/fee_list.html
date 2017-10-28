@@ -168,7 +168,7 @@
             $("<input type='button' value='删除' class='btn_delete'/>").appendTo(tdall).click(del);
 
             var tr = $("<tr></tr>").append(id).append(name).append(base_duration).append(base_cost)
-                    .append(unit_cost).append(creatime).append(startime).append(status).append(tdall);
+                    .append(unit_cost).append(creatime).append(startime).append(status).append(tdall).attr("id","trCost");
             $("#tb").append(tr)
         }
     }
@@ -215,9 +215,9 @@
         <!--排序-->
         <div class="search_add">
             <div>
-                <input type="button" value="月租" class="sort_asc" onclick="sort(this);"/>
-                <input type="button" value="基费" class="sort_asc" onclick="sort(this);"/>
-                <input type="button" value="时长" class="sort_asc" onclick="sort(this);"/>
+                <!--<input type="button" value="月租" class="sort_asc" onclick="sort(this);"/>-->
+                <input type="button" value="基费" class="sort_asc" onclick="sortByBaseCost(this);"/>
+                <input type="button" value="时长" class="sort_asc" onclick="sortByBaseDuration(this);"/>
             </div>
             <a href="/toFeeAddPage">增加</a>
 
