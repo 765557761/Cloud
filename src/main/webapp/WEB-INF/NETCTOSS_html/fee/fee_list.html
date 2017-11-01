@@ -77,8 +77,8 @@
                 for (var i = 0; i < result.pages; i++) {
                     var td = $("<td></td>").appendTo(tr).append($("<a></a>").html((i + 1)).click(stus));
                 }
-                var first = $("<a></a>").html("首页").click(stus).attr("id", 1);
-                var last = $("<a></a>").html("尾页").click(stus).attr("id", result.pages);
+                var first = $("<a></a>").html("上一页").click(stus).attr("id", 1);
+                var last = $("<a></a>").html("下一页").click(stus).attr("id", result.pages);
                 tr.append(last).prepend(first);
                 $("#pages").append(tr)
             }
@@ -105,7 +105,7 @@
     //点击分页
     function stus() {
         $("#tb").children().remove();
-        if ($(this).html() == "首页") {
+        if ($(this).html() == "上一页") {
             $.ajax({
                 type: "post",
                 url: "/stu",
@@ -120,7 +120,7 @@
                 }
             })
         }
-        if ($(this).html() == "尾页") {
+        if ($(this).html() == "下一页") {
             $.ajax({
                 type: "post",
                 url: "/stu",
@@ -198,7 +198,7 @@
     <ul id="menu">
         <li><a href="/index" class="index_on"></a></li>
         <li><a href="/toRoleInfoListPage" class="role_off"></a></li>
-        <li><a href="admin/admin_list.html" class="admin_off"></a></li>
+        <li><a href="/toAdminListPage" class="admin_off"></a></li>
         <li><a href="/toFeeListPage" class="fee_off"></a></li>
         <li><a href="/toAccountListPage" class="account_off"></a></li>
         <li><a href="/toServiceListPage" class="service_off"></a></li>

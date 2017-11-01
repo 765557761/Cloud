@@ -63,5 +63,6 @@
     <inspection_tool class="MapOrSetKeyShouldOverrideHashCodeEquals" enabled="true" level="CRITICAL" enabled_by_default="false" />
     <inspection_tool class="MybatisConfigXmlInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="MybatisMapperMethodInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="SpringJavaAutowiringInspection" enabled="false" level="ERROR" enabled_by_default="false" />
   </profile>
 </component>

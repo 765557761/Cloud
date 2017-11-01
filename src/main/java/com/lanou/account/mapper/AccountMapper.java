@@ -1,6 +1,7 @@
 package com.lanou.account.mapper;
 
 import com.lanou.account.bean.Account;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,7 +22,9 @@ public interface AccountMapper {
 
     List<Account> findAllAccount();
 
-    List<Account> like(String idcard, String realName,String loginName);
+    List<Account> like(@Param("idcard") String idcard,
+                       @Param("realName") String realName,
+                       @Param("loginName") String loginName);
 
     void setState1(Integer id);
 

@@ -57,7 +57,7 @@ public class CostController {
     @RequestMapping(value = "/addFee",method = RequestMethod.POST)
     public String fee_add(Cost cost){
         service.add(cost);
-        return "fee/fee_list";
+        return "addOK";
     }
     //删除
     @ResponseBody
@@ -134,4 +134,5 @@ public class CostController {
         service.updateByPrimaryKeySelective(cost);
         return "setStatusOK";
     }
+
 }

@@ -25,27 +25,27 @@
 
         <!-- !!!! Model Configurations !!!! -->
         <!--./src/main/java / com.blog.bean-->
-        <javaModelGenerator targetPackage="com.lanou.admin_role.bean"
+        <javaModelGenerator targetPackage="com.lanou.role_module.bean"
                             targetProject="./src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- !!!! Mapper XML Configurations !!!! -->
-        <sqlMapGenerator targetPackage="com.lanou.admin_role.mapper"
+        <sqlMapGenerator targetPackage="com.lanou.role_module.mapper"
                          targetProject="./src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- !!!! Mapper Interface Configurations !!!! -->
-        <javaClientGenerator targetPackage="com.lanou.admin_role.mapper"
+        <javaClientGenerator targetPackage="com.lanou.role_module.mapper"
                              targetProject="./src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!-- !!!! Table Configurations !!!! -->
         <!--blog >>> 表名-->
-        <table tableName="admin_role"
+        <table tableName="role_module"
                enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>

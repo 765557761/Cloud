@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+﻿﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +10,6 @@
 </head>
 <script>
     function detail() {
-        alert("detail");
         $.ajax({
             url: "/newDetail",
             success: function (result) {
@@ -23,7 +22,6 @@
                 $("#creatime").val(result.creatime);
                 $("#startime").val(result.startime);
                 $("#descr").val(result.descr);
-
             }
         })
     }
@@ -108,7 +106,7 @@
         <textarea id="descr" class="width300 height70 readonly" readonly></textarea>
     </div>
     <div class="button_info clearfix">
-        <input type="button" value="返回" class="btn_save" onclick="location.href='fee_list.html';"/>
+        <input type="button" value="返回" class="btn_save" onclick="location.href='/toFeeListPage'"/>
     </div>
     <!--</form>  -->
 </div>

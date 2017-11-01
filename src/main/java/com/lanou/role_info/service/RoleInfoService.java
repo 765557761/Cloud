@@ -20,4 +20,10 @@ public interface RoleInfoService {
     RoleInfo findNameById(Integer id);
 
     void delById(Integer id);
+
+    RoleInfo findRoleByName(String name);
+
+    void update(RoleInfo roleInfo1);
+
+    void insert(RoleInfo roleInfo);
 }

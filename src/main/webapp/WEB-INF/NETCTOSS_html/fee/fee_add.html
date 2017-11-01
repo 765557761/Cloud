@@ -38,9 +38,9 @@
     <!--<form action="" method="post" class="main_form">-->
     <div class="text_info clearfix"><span>资费名称：</span></div>
     <div class="input_info">
-        <input type="text" id="name" class="width300" value=""/>
+        <input type="text" id="costName" class="width300" value=""/>
         <span class="required">*</span>
-        <div class="validate_msg_short">50长度的字母、数字、汉字和下划线的组合</div>
+        <div id="dname" class="validate_msg_short">以字母开头，包含数字、字母</div>
     </div>
     <div class="text_info clearfix"><span>资费类型：</span></div>
     <div class="input_info fee_type">
@@ -56,30 +56,30 @@
         <input type="text" id="baseDuration" value="" class="width100"/>
         <span class="info">小时</span>
         <span class="required">*</span>
-        <div class="validate_msg_long">1-600之间的整数</div>
+        <div id="durationJ" class="validate_msg_long">1-600之间的整数</div>
     </div>
     <div class="text_info clearfix"><span>基本费用：</span></div>
     <div class="input_info">
         <input type="text" id="baseCost" value="" class="width100"/>
         <span class="info">元</span>
         <span class="required">*</span>
-        <div class="validate_msg_long error_msg">0-99999.99之间的数值</div>
+        <div id="costJ" class="validate_msg_long ">0-99999.99之间的数值</div>
     </div>
     <div class="text_info clearfix"><span>单位费用：</span></div>
     <div class="input_info">
         <input type="text" id="unitCost" value="" class="width100"/>
         <span class="info">元/小时</span>
         <span class="required">*</span>
-        <div class="validate_msg_long error_msg">0-99999.99之间的数值</div>
+        <div id="costD" class="validate_msg_long ">0-99999.99之间的数值</div>
     </div>
     <div class="text_info clearfix"><span>资费说明：</span></div>
     <div class="input_info_high">
         <textarea id="descr" class="width300 height70"></textarea>
-        <div class="validate_msg_short error_msg">100长度的字母、数字、汉字和下划线的组合</div>
+        <div class="validate_msg_short ">100长度的字母、数字、汉字和下划线的组合</div>
     </div>
     <div class="button_info clearfix">
-        <input id="btn_save" type="button" value="保存" class="btn_save" />
-        <input type="button" value="取消" class="btn_save" />
+        <input id="btn_save" type="button" value="保存" class="btn_save"/>
+        <input type="button" value="取消" class="btn_save" onclick="location.href='/toFeeListPage'"/>
     </div>
     <!--</form>  -->
 </div>
@@ -91,25 +91,54 @@
 </div>
 </body>
 <script>
+    function term(parameter) {
+
+    }
     //添加
     $("#btn_save").click(function () {
         alert("fee_add");
-        $.ajax({
-            type:"post",
-            url: "/addFee",
-            data: {
-                name: $("#name").val(),
-                baseDuration: $("#baseDuration").val(),
-                baseCost: $("#baseCost").val(),
-                unitCost: $("#unitCost").val(),
-                descr: $("#descr").val(),
-                costType:$("input[type='radio']:checked").val()
-            },
-            success:function (result) {
-                console.log(result);
-                window.location.href = "/toFeeListPage"
-            }
-        })
+        var costNameMsg = /^[a-zA-Z].[0-9]/;
+        var costJD = /^[0-9]{1,5}$/;
+        var durationJ = /^[0-6][0-9][0-9]$/;
+
+        if (costNameMsg.test($("#costName").val()) != true) {
+            window.confirm("资费名称格式错误！");
+            $("#dname").html("格式错误,以字母开头，包含数字、字母!!!");
+            return;
+        }
+        if (durationJ.test($("#baseDuration").val()) != true) {
+            window.confirm("基本时长输入错误！");
+            $("#durationJ").html("输入错误，0-600之间的数值");
+            return;
+        }
+        if (costJD.test($("#baseCost").val()) != true) {
+            window.confirm("基本费用输入错误！");
+            $("#costJ").html("输入错误，0-99999之间的数值");
+            return;
+        }
+        if (costJD.test($("#unitCost").val()) != true) {
+            window.confirm("单位费用输入错误！");
+            $("#costD").html("输入错误，0-99999之间的数值");
+            return;
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: "/addFee",
+                data: {
+                    name: $("#costName").val(),
+                    baseDuration: $("#baseDuration").val(),
+                    baseCost: $("#baseCost").val(),
+                    unitCost: $("#unitCost").val(),
+                    descr: $("#descr").val(),
+                    costType: $("input[type='radio']:checked").val()
+                },
+                success: function (result) {
+                    alert(result);
+                    window.location.href = "/toFeeListPage"
+                }
+            })
+        }
     });
 
     function showResultDiv(flag) {

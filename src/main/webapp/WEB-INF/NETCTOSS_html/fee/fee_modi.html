@@ -43,11 +43,11 @@
     </div>
     <div class="text_info clearfix"><span>资费类型：</span></div>
     <div class="input_info fee_type">
-        <input value="包月" type="radio" name="radFeeType" id="monthly" onclick="feeTypeChange(1);"/>
+        <input value="包月" type="radio" name="radFeeType" id="monthly" />
         <label for="monthly">包月</label>
-        <input value="套餐" type="radio" name="radFeeType" checked="checked" id="package" onclick="feeTypeChange(2);"/>
+        <input value="套餐" type="radio" name="radFeeType" checked="checked" id="package" />
         <label for="package">套餐</label>
-        <input value="计时" type="radio" name="radFeeType" id="timeBased" onclick="feeTypeChange(3);"/>
+        <input value="计时" type="radio" name="radFeeType" id="timeBased"/>
         <label for="timeBased">计时</label>
     </div>
     <div class="text_info clearfix"><span>基本时长：</span></div>
@@ -77,10 +77,10 @@
         <div class="validate_msg_short error_msg">100长度的字母、数字、汉字和下划线的组合</div>
     </div>
     <div class="button_info clearfix">
-        <!--<input id="btn_save" type="button" value="保存" class="btn_save"/>-->
-        <!--<input type="button" value="取消" class="btn_save"/>-->
-        <a id="btn_save">保存</a>
-        <a class="btn_save">取消</a>
+        <input id="costSave" type="button" value="保存" class="btn_save"/>
+        <input type="button" value="取消" class="btn_save" onclick="location.href='/toFeeListPage'"/>
+        <!--<a id="btn_save">保存</a>-->
+        <!--<a class="btn_save">取消</a>-->
     </div>
     <!--</form>  -->
 </div>
@@ -91,7 +91,7 @@
     <span>版权所有(C)云科技有限公司 </span>
 </div>
 </body>
-<script>
+<script type="text/javascript">
     //    //保存结果的提示
     //    function showResult() {
     //        showResultDiv(true);
@@ -119,7 +119,7 @@
             }
         })
     }
-    $("#btn_save").click(function () {
+    $("#costSave").click(function () {
         alert("save");
         $.ajax({
             type: "post",

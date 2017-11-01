@@ -25,4 +25,6 @@ public interface SerService {
 
 
     List<SService> findS(String osUsername, String unixHost, String status, Integer accountId);
+
+    void updateCost(SService sService);
 }

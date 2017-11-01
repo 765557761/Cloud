@@ -38,9 +38,7 @@ public class AccountController {
     public String toModiJsp(){
         return "account/account_modi";
     }
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // 添加
     @ResponseBody
     @RequestMapping(value = "/add",method = RequestMethod.POST)
@@ -128,7 +126,6 @@ public class AccountController {
 
         return "setStateOK";
     }
-
     // 搜索
     @ResponseBody
     @RequestMapping(value = "/like")
@@ -141,5 +138,4 @@ public class AccountController {
         System.out.println(list);
         return list;
     }
-
 }

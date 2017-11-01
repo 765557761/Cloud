@@ -89,13 +89,16 @@ public class ServiceController {
     @RequestMapping(value = "/modiSs",method = RequestMethod.POST)
     public String modiS(@RequestParam("descr") String descr,
                         HttpServletRequest request){
+
         SService sService = (SService) request.getSession().getAttribute("SService");
-        Cost cost = costService.selectById(sService.getCostId());
-        cost.setDescr(descr);
-        if (sService.getStatus().equals("删除")){
-            return "modiSNO";
-        }
-        costService.updateByPrimaryKeySelective(cost);
+//        Cost cost = costService.selectById(sService.getCostId());
+//        cost.setDescr(descr);
+        Cost cost = costService.selectByDescr(descr);
+        sService.setCostId(cost.getCostId());
+//        if (sService.getStatus().equals("删除")){
+//            return "modiSNO";
+//        }
+        service.updateCost(sService);
         return "modiSOK";
     }
     //添加
@@ -147,13 +150,18 @@ public class ServiceController {
     }
     //查询
     @ResponseBody
-    @RequestMapping(value = "/findSer",method = RequestMethod.POST)
-    public List<SService> findS(@RequestParam("osUsername") String osUsername,
-                                @RequestParam("idcardNo") String idcardNo,
-                                @RequestParam("unixHost") String unixHost,
-                                @RequestParam("status") String status){
+    @RequestMapping(value = "/findSer")
+    public List<SService> findS(@RequestParam(value = "osUsername",required = false) String osUsername,
+                                @RequestParam(value = "idcardNo",required = false) String idcardNo,
+                                @RequestParam(value = "unixHost",required = false) String unixHost,
+                                @RequestParam(value = "status",required = false) String status){
+        System.out.println("osUsername:---"+osUsername+"idcardNo:---"+idcardNo
+                +"unixHost:---"+unixHost+"status:---"+status);
         Integer accountId = accountService.findIdCard(idcardNo).getAccountId();
         List<SService> list = service.findS(osUsername, unixHost, status, accountId);
+        for (SService sService : list) {
+            System.out.println("~~~~~~~" + sService);
+        }
         return list;
     }
 

@@ -78,11 +78,14 @@ public class SerServiceImpl implements SerService {
         sService.setCloseDate((new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date())));
         mapper.updateByPrimaryKeySelective(sService);
     }
-
+    //查询
     public List<SService> findS(String osUsername, String unixHost, String status, Integer accountId) {
         return mapper.findS(osUsername,unixHost,status,accountId);
     }
 
+    public void updateCost(SService sService) {
+        mapper.updateByPrimaryKeySelective(sService);
+    }
 
 
 }

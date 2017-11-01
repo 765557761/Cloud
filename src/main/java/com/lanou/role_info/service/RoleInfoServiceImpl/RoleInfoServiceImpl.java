@@ -2,9 +2,12 @@ package com.lanou.role_info.service.RoleInfoServiceImpl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lanou.module_info.bean.ModuleInfo;
 import com.lanou.role_info.bean.RoleInfo;
 import com.lanou.role_info.mapper.RoleInfoMapper;
 import com.lanou.role_info.service.RoleInfoService;
+import com.lanou.role_module.bean.RoleModule;
+import com.lanou.role_module.service.RoleModuleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +21,8 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 
     @Resource
     private RoleInfoMapper mapper;
+    @Resource
+    private RoleModuleService service;
 
     public List<RoleInfo> findwithPageInfo(Integer pageNo, Integer pageSize) {
         // 目标：获取PageInfo对象
@@ -41,6 +46,27 @@ public class RoleInfoServiceImpl implements RoleInfoService {
         mapper.deleteByPrimaryKey(id);
     }
 
+    public RoleInfo findRoleByName(String name) {
+        return mapper.findRoleByName(name);
+    }
+
+    public void update(RoleInfo roleInfo1) {
+        mapper.updateByPrimaryKeySelective(roleInfo1.getName(),roleInfo1.getRoleId());
+        mapper.deleteByPrimaryKey(roleInfo1.getRoleId());
+        List<ModuleInfo> moduleInfoList = roleInfo1.getModuleInfoList();
+        for (ModuleInfo moduleInfo : moduleInfoList) {
+            mapper.insertModule(roleInfo1.getRoleId(),moduleInfo.getModuleId());
+        }
+    }
+
+    public void insert(RoleInfo roleInfo) {
+        mapper.insertSelective(roleInfo);
+        List<ModuleInfo> moduleInfoList = roleInfo.getModuleInfoList();
+        for (ModuleInfo moduleInfo : moduleInfoList) {
+            service.insert(roleInfo.getRoleId(),moduleInfo.getModuleId());
+        }
+    }
+
     public PageInfo<RoleInfo> queryStudentByPage(Integer pageNo, Integer pageSize) {
         pageNo = pageNo == null ? 1 : pageNo;
         pageSize = pageSize == null ? 6 : pageSize;
@@ -51,4 +77,5 @@ public class RoleInfoServiceImpl implements RoleInfoService {
         PageInfo<RoleInfo> pageInfo = new PageInfo<RoleInfo>(roleInfoList);
         return pageInfo;
     }
+
 }

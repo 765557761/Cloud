@@ -33,9 +33,14 @@
     from service
   </select>
   <select id="findS" resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List"/>
-    FROM service WHERE os_username = #{arg0} or unix_host = #{arg1}
-    or status = #{arg2} or account_id = #{arg3}
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM service
+    WHERE
+    os_username like CONCAT("%",#{osUsername},"%")
+    and unix_host like CONCAT("%",#{unixHost},"%")
+    and status like CONCAT("%",#{status},"%")
+    and account_Id like CONCAT("%",#{accountId},"%")
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from service

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,17 +28,18 @@
                 })
             }
             roleModi();
-            var arr=[];
-            $("input[type=checkbox]:checked").each(function () {
-                arr.push($(this).attr("id"));
-            });
+
             function showResult() {
+                var str="";
+                $("input[type=checkbox]:checked").each(function () {
+                    str = str + $(this).attr("id") + ",";
+                });
                 alert("modi");
                 $.ajax({
                     url:"/modiRM",
                     data:{
                         nameRM:$("#nameRM").val(),
-                        arr:arr
+                        str:str
                     },
                     success:function (result) {
                         alert(result);
